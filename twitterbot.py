@@ -5,10 +5,10 @@ def botfun():
 	print('The bot is starting..', flush=True)
 	#TWITTER API CONECTION
 
-	 c_key = os.environ.get('CONSUMER_KEY')
-	 c_sec = os.environ.get('CONSUMER_SECRET')
-	 t_key = os.environ.get('ACCESS_KEY')
-	 t_sec = os.environ.get('ACCESS_SECRET')
+	c_key = os.environ.get('CONSUMER_KEY')
+	c_sec = os.environ.get('CONSUMER_SECRET')
+	t_key = os.environ.get('ACCESS_KEY')
+	t_sec = os.environ.get('ACCESS_SECRET')
 
 	auth = tweepy.OAuthHandler(c_key, c_sec)
 	auth.set_access_token(t_key,t_sec)
