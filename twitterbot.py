@@ -62,7 +62,6 @@ def botfun():
 	}
 	# LIST TO EASE THE FILTERING OF THE HASHTAGS
 
-
 	hashtag = ["#americanbulldog",
 				"#britishbulldog",
 				"#frenchbulldog",
@@ -74,20 +73,24 @@ def botfun():
 	def reply_to_tweets():
 		print('Looking for tweets', flush=True)
 
+		# FETCH THE LAST TWEET
 		last_seen_id = retrieve_last_seen_id(FILE_NAME)
 		mentions = api.mentions_timeline(last_seen_id, tweet_mode='extended')
-
 
 		for mention in reversed(mentions):
 			print(str(mention.id) + ' -- ' + mention.full_text, flush=True)
 
+			#STORING THE LAS SEEN TWEET IN last_seen_id.txt
 			last_seen_id = mention.id
 			store_last_seen_id(last_seen_id, FILE_NAME)
 
+			#CHECK IF THERE IS A HASHTAG IN THE TWEET
 			for item in hashtag:
+				#IF THERE ARE MULTIPLE IT WILL RESPOND TO EACH 
 				if item in mention.full_text.lower():
 					print('Responding back', flush=True)
 
+					#THE TWEET ITSELF
 					imagePath = dogimg[item]
 					api.update_with_media(imagePath, '@' + mention.user.screen_name + randomtext[randrange(10)], in_reply_to_status_id=mention.id, auto_populate_reply_metadata=True)
 
